@@ -1,0 +1,38 @@
+{
+  "name": "chubbard022-recipebookbe",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "scripts": {
+    "server": "nodemon ./src/index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chubbard022/chubbard022-recipeBookBE.git"
+  },
+  "author": "curtis <chubbard022@gmail.com>",
+  "license": "MIT",
+  "description": "Recipe book backend",
+  "bugs": {
+    "url": "https://github.com/Chubbard022/chubbard022-recipeBookBE/issues"
+  },
+  "homepage": "https://github.com/Chubbard022/chubbard022-recipeBookBE#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.13",
+    "pg": "^8.0.0",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "jest": "^25.2.7",
+    "nodemon": "^2.0.2"
+  }
+}
