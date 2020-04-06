@@ -1,4 +1,4 @@
-import pg from "pg"
+const pg = require('pg');
 
 
 module.exports = {
