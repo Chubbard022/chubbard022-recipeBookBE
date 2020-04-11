@@ -20,8 +20,8 @@ server.use(cors({
 server.use("/api/inspiration",inspoRoutes)
 server.use("/api/recipes",recipeMakerRoutes)
 // server.use("/api/social",socialRoutes)
-// server.use("/api/user",userRoutes)
+server.use("/api/user",userRoutes)
 
 
-//registerRoutes(server)
+registerRoutes(server)
 module.exports = server;     
