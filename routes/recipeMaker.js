@@ -14,8 +14,9 @@ router.get("/",authenticate,(req,res)=>{
 })
 
 router.post("/",authenticate,(req,res)=>{
+    req.body.usernames = req.decoded.username
     db("recipes")
-        .insert(req.body)
+    .insert(req.body)
         .then(response=>res.status(201).json(response))
         .catch(err=>res.status(400).json("cannot create new recipe"))
 })
