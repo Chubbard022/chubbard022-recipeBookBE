@@ -19,7 +19,7 @@ server.use(cors({
 
 server.use("/api/inspiration",inspoRoutes)
 server.use("/api/recipes",recipeMakerRoutes)
-// server.use("/api/social",socialRoutes)
+server.use("/api/social",socialRoutes)
 server.use("/api/user",userRoutes)
 
 
