@@ -5,7 +5,7 @@ const db = knex(knexConfig.development)
 const {authenticate} = require("./auth/authenticate")
 
 
-router.get("/",authenticate,(req,res)=>{
+router.get("/",(req,res)=>{
     db("recipes")
         .then(response=>{
             res.status(200).json(response)
@@ -13,15 +13,15 @@ router.get("/",authenticate,(req,res)=>{
         .catch(err=>res.status(400).json(err))
 })
 
-router.post("/",authenticate,(req,res)=>{
-    req.body.usernames = req.decoded.username
+router.post("/",(req,res)=>{
+
     db("recipes")
     .insert(req.body)
         .then(response=>res.status(201).json(response))
         .catch(err=>res.status(400).json("cannot create new recipe"))
 })
 
-router.put("/:id",authenticate,(req,res)=>{
+router.put("/:id",(req,res)=>{
     db("recipes")
         .where({id : req.params.id})
         .update(req.body)

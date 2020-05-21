@@ -35,7 +35,8 @@ module.exports = server => {
           res.status(200).json({
             message: `Welcome ${user.username}!`,
             token,
-            id
+            id,
+            username
           });
         } else {
           res.status(401).json({ errorMessage: "Username and/or Password are incorrect" });
