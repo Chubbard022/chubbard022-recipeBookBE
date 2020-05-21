@@ -25,7 +25,7 @@ exports.up = function(knex) {
         recipe.string("name").notNullable()
         recipe.string("ingredients").notNullable()
         recipe.string("instructions").notNullable()
-        recipe.string("usernames")
+        recipe.string("username")
                 
     })
 };
