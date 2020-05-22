@@ -7,9 +7,7 @@ const {authenticate} = require("./auth/authenticate")
 
 router.get("/",(req,res)=>{
     db("recipes")
-        .then(response=>{
-            res.status(200).json(response)
-        })
+        .then(response=>res.status(200).json(response))
         .catch(err=>res.status(400).json(err))
 })
 
@@ -29,11 +27,11 @@ router.put("/:id",(req,res)=>{
         .catch(err=>res.status(400).json(err))
 })
 
-router.delete("/:id",authenticate,(req,res)=>{
+router.delete("/:id",(req,res)=>{
     db("recipes")
         .where({id: req.params.id})
         .del()
-        .then(response=>res.status(200))
+        .then(()=>res.status(200).json({SuccessMessage: "Successfully deleted recipe"}))
         .catch(err=>res.status(400).json(err))
 })
 
