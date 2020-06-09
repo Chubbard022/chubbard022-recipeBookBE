@@ -18,6 +18,7 @@ exports.up = function(knex) {
         tbl.string("name")
         tbl.string("ingredients")
         tbl.string("instructions")
+        tbl.string("image")
     })
     .createTable("recipes", recipe=>{
     
