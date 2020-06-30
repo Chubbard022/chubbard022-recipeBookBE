@@ -6,19 +6,23 @@ const {authenticate} = require("./auth/authenticate")
 
 
 
-router.get("/",authenticate,(req,res)=>{
+router.get("/",(req,res)=>{
     db("users")
+        .select("username","id")
         .then(user=>{
             res.status(200).json(user)
         })
         .catch(err=>console.log("Error: Cannot get users"))
 })
-router.get("/recipe",authenticate,(req,res)=>{
+router.get("/:username",(req,res)=>{
+    let usernameSelected = req.params.username
     db("users")
-        .join("recipes","users.username", "=", "recipes.usernames")
-        .select("usernames","name","ingredients","instructions")
+        .join("recipes","users.username", "=", "recipes.username")
     .then(response=>{
-        res.status(200).json(response)
+       let filterResponse =  response.filter(recipe=>{
+            return recipe.username === usernameSelected
+        })
+        res.status(200).json(filterResponse)
     })
     .catch(err=>res.status(400).json(err))
 })
