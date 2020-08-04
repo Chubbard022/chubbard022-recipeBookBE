@@ -2,12 +2,18 @@ const knex = require("knex")
 const router = require("express").Router()
 const knexConfig = require("../knexfile")
 const db = knex(knexConfig.development)
-const {authenticate} = require("./auth/authenticate")
 
 router.get('/',(req,res)=>{
     db("favorited")
         .then(response=>res.status(200).json(response))
         .catch(err=> res.status(400).json(err))
+})
+
+router.get("/:id",(req,res)=>{
+    db("favorited")
+    .where({id:req.params.id})
+        .then(response=>res.status(200).json(response))
+        .catch(err=>res.status(400).json(err))
 })
 
 router.post("/",(req,res)=>{
@@ -16,14 +22,6 @@ router.post("/",(req,res)=>{
         .then(response=>res.status(201).json(response))
         .catch(err=>res.status(400).json(err))
 })
-
-router.put("/:id",(req,res)=>{
-    db("favorited")
-        .where({id:req.params.id})
-        .update(req.body)
-            .then(response=>res.status(200).json(response))
-            .catch(err=>res.status(400).json(err))
-        })
 
 router.delete("/:id",(req,res)=>{
     db("favorited")
