@@ -6,12 +6,14 @@ exports.up = function(knex) {
             user.string("username",50).notNullable().unique()
             user.string("password",255).notNullable()
         })
-        .createTable("inspiration",(tbl)=>{
-            tbl.increments("id")
-            tbl.string("name")
-            tbl.string("ingredients")
-            tbl.string("instructions")
-            tbl.string("image")
+        .createTable("inspiration",(inspiration)=>{
+            inspiration.increments("id")
+            inspiration.string("name")
+            inspiration.string("ingredients")
+            inspiration.string("instructions")
+            inspiration.string("image")
+            inspiration.boolean("favorited").notNullable()
+
         })
         .createTable("recipes", recipe=>{
             recipe.increments("id")
@@ -19,13 +21,16 @@ exports.up = function(knex) {
             recipe.string("ingredients").notNullable()
             recipe.string("instructions").notNullable()
             recipe.string("username")
+            recipe.boolean("favorited").notNullable()
         })
         .createTable("favorited",favorite=>{
             favorite.increments("id")
             favorite.string("name").notNullable()
             favorite.string("ingredients").notNullable()
             favorite.string("instructions").notNullable()
+            favorite.string("username").notNullable()
             favorite.boolean("favorited")
+
         })
 };
 

@@ -2,7 +2,6 @@ const knex = require("knex")
 const router = require("express").Router()
 const knexConfig = require("../knexfile")
 const db = knex(knexConfig.development)
-const {authenticate} = require("./auth/authenticate")
 
 
 router.get("/",(req,res)=>{
