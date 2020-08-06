@@ -29,7 +29,9 @@ exports.up = function(knex) {
             favorite.string("ingredients").notNullable()
             favorite.string("instructions").notNullable()
             favorite.string("username").notNullable()
+            favorite.string("image")
             favorite.boolean("favorited")
+
 
         })
 };

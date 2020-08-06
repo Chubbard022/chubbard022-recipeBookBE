@@ -17,7 +17,7 @@ router.get("/",(req,res)=>{
 router.get("/:username",(req,res)=>{
     let usernameSelected = req.params.username
     db("users")
-        .join("recipes","users.username", "=", "recipes.username")
+    .join("recipes","users.username", "=", "recipes.username")
     .then(response=>{
        let filterResponse =  response.filter(recipe=>{
             return recipe.username === usernameSelected
