@@ -3,37 +3,32 @@ const router = require("express").Router()
 const knexConfig = require("../knexfile")
 const db = knex(knexConfig.development)
 
+router.get('/',(req,res)=>{
+    db("favorited")
+        .then(response=>res.status(200).json(response))
+        .catch(err=> res.status(400).json(err))
+})
 
-router.get("/",(req,res)=>{
-    db("recipes")
+router.get("/:id",(req,res)=>{
+    db("favorited")
+    .where({id:req.params.id})
         .then(response=>res.status(200).json(response))
         .catch(err=>res.status(400).json(err))
 })
 
 router.post("/",(req,res)=>{
-
-    db("recipes")
+    db("favorited")
     .insert(req.body)
         .then(response=>res.status(201).json(response))
-        .catch(err=>res.status(400).json("cannot create new recipe"))
-})
-
-router.put("/:id",(req,res)=>{
-    db("recipes")
-        .where({id : req.params.id})
-        .update(req.body)
-            .then(response=>res.status(200).json(response))
-            .catch(err=>res.status(400).json(err))
+        .catch(err=>res.status(400).json(err))
 })
 
 router.delete("/:id",(req,res)=>{
-    db("recipes")
+    db("favorited")
         .where({id: req.params.id})
         .del()
-            .then(()=>res.status(200).json({SuccessMessage: "Successfully deleted recipe"}))
+            .then(()=>res.status(200).json({SuccessMessage: "Successfully Deleted Favorited Recipe"}))
             .catch(err=>res.status(400).json(err))
 })
 
-
-module.exports = router
-
+module.exports = router;
