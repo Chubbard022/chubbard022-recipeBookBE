@@ -31,9 +31,13 @@ exports.up = function(knex) {
             favorite.string("username").notNullable()
             favorite.string("image")
             favorite.boolean("favorited")
-
-
         })
+        
+        //need to add mutual table for favorited and users
+
+        // need to add table for pantry
+
+        //need to add mutual table for pantry and recipe
 };
 
 exports.down = function(knex) {
