@@ -1,9 +1,8 @@
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
-const {authenticate} = require("./auth/authenticate")
-const secret = require('./auth/secrets').jwtKey
-const Users = require("./auth/authenticate")
+const secret = require('../auth/secrets').jwtKey
+const Users = require("../auth/authenticate")
 
 module.exports = server => {
     server.post("/api/register", register);

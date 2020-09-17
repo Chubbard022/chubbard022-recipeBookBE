@@ -1,8 +1,8 @@
 const knex = require("knex")
 const router = require("express").Router()
-const knexConfig = require("../knexfile")
+const knexConfig = require("../../knexfile")
 const db = knex(knexConfig.development)
-const {authenticate} = require("./auth/authenticate")
+const {authenticate} = require("../auth/authenticate")
 
 
 
