@@ -1,29 +1,38 @@
-const knex = require("knex")
 const router = require("express").Router()
+const socialHelper = require("../helperFunctions/socialHelper")
+
+const knex = require("knex")
 const knexConfig = require("../../knexfile")
 const db = knex(knexConfig.development)
-const {authenticate} = require("../auth/authenticate")
 
+router.get("/",async (req,res)=>{
+    try{
+        let getUsers =  await socialHelper.find();
 
-
-router.get("/",(req,res)=>{
-    db("users")
-        .select("username","id")
-        .then(user=>{
-            res.status(200).json(user)
+        res.status(200).json(getUsers);
+    }
+    catch(error){
+        res.status(500).json({
+            errorMessage:
+            "Sorry something went wrong with getting all users"
         })
-        .catch(err=>console.log("Error: Cannot get users"))
+        throw new Error(error)
+    }
 })
-router.get("/:username",(req,res)=>{
-    let usernameSelected = req.params.username
-    db("users")
-    .join("recipes","users.username", "=", "recipes.username")
-    .then(response=>{
-       let filterResponse =  response.filter(recipe=>{
-            return recipe.username === usernameSelected
+
+router.get("/:username", async (req,res)=>{
+    try{
+        let findUserRecipe = req.params.username;
+        let getRecipesFromUser = await socialHelper.findByUsername(findUserRecipe);
+
+        res.status(200).json(getRecipesFromUser);
+    }catch(error){
+        res.status(500).json({
+            errorMessage:
+            "Sorry something went wrong getting recipes from user"
         })
-        res.status(200).json(filterResponse)
-    })
-    .catch(err=>res.status(400).json(err))
+        throw new Error(error);
+    }
 })
+
 module.exports = router

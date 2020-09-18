@@ -45,10 +45,10 @@ router.post("/",async (req,res)=>{
     }
 })
 
-router.delete("/:id",(req,res)=>{
+router.delete("/:id", async (req,res)=>{
     try{
         let id = req.params.id;
-        let deleteFavRecipe = favoriteHelper.remove(id);
+        let deleteFavRecipe = await favoriteHelper.remove(id);
 
         res.status(200).json(deleteFavRecipe);
     }catch(error){
