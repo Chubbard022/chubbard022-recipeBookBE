@@ -6,7 +6,7 @@ module.exports = {
     find,
     findById,
     findUserFavorited,
-    add,
+    add,            
     remove
 }
 
