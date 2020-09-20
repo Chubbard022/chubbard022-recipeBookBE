@@ -1,10 +1,6 @@
 const router = require("express").Router()
 const socialHelper = require("../helperFunctions/socialHelper")
 
-const knex = require("knex")
-const knexConfig = require("../../knexfile")
-const db = knex(knexConfig.development)
-
 router.get("/",async (req,res)=>{
     try{
         let getUsers =  await socialHelper.find();
