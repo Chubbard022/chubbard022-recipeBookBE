@@ -15,6 +15,20 @@ router.get("/", async (req,res)=>{
     }
 })
 
+router.get("/:id", async (req,res)=>{
+    try{
+        let recipeId = req.params.id;
+        let getRecipe = await recipeHelper.findById(recipeId);
+
+        res.status(200).json(getRecipe);
+    }catch(error){
+        res.status(500).json({
+            errorMessage:
+            "sorry something went wrong getting recipe"
+        })
+    }
+})
+
 router.post("/", async (req,res)=>{
     try{
         let newRecipe = req.body;
