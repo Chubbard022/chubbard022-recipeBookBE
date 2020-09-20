@@ -32,16 +32,47 @@ exports.up = function(knex) {
             favorite.string("image")
             favorite.boolean("favorited")
         })
-        
-        //need to add mutual table for favorited and users
-
-        // need to add table for pantry
-
-        //need to add mutual table for pantry and recipe
+        .createTable("pantryItems",itm=>{
+            itm.increments("id")
+            itm.string("nameOfItem").notNullable();
+            itm.integer("quantity").notNullable()
+        })
+        .createTable("usersFavrotied",usr=>{
+            usr.increments("id")
+            usr.integer("user_id")
+                .unsigned()
+                .references("id")
+                .inTable("users")
+                .onDelete("RESTRICT")
+                .onUpdate("CASCADE")
+            usr.integer("favorited")
+                .unsigned()
+                .references("id")
+                .inTable("favorited")
+                .onDelete("RESTRICT")
+                .onUpdate("CASCADE")
+        })
+        .createTable("recipeOfPantryItems",itm=>{
+            itm.increments("id")
+            itm.integer("recipe_id")
+                .unsigned()
+                .references("id")
+                .inTable("recipes")
+                .onDelete("RESTRICT")
+                .onUpdate("CASCADE")
+            itm.integer("pantryItem_id")
+                .unsigned()
+                .references("id")
+                .inTable("pantryItems")
+                .onDelete("RESTRICT")
+                .onUpdate("CASCADE")
+        })
 };
 
 exports.down = function(knex) {
     return knex.schema
+        .dropTableIfExists("pantryItems")
+        .dropTableIfExists("usersFavrotied")
         .dropTableIfExists("favorited")
         .dropTableIfExists("recipes")
         .dropTableIfExists("inspiration")
