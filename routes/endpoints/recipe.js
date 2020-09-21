@@ -17,8 +17,8 @@ router.get("/", async (req,res)=>{
 
 router.get("/:id", async (req,res)=>{
     try{
-        let recipeId = req.params.id;
-        let getRecipe = await recipeHelper.findById(recipeId);
+        let {id} = req.params;
+        let getRecipe = await recipeHelper.findById(id);
 
         res.status(200).json(getRecipe);
     }catch(error){
@@ -47,9 +47,9 @@ router.post("/", async (req,res)=>{
 
 router.put("/:id", async (req,res)=>{
     try{
-        let recipeId = req.params.id;
+        let {id} = req.params;
         let recipeToUpdate = req.body;
-        let updateRecipe = await recipeHelper.update(recipeId,recipeToUpdate);
+        let updateRecipe = await recipeHelper.update(id,recipeToUpdate);
 
         res.status(200).json(updateRecipe);
     }catch(error){
@@ -64,7 +64,7 @@ router.put("/:id", async (req,res)=>{
 router.delete("/:id", async (req,res)=>{
     try{
         let recipId = req.params.id;
-        let deleteRecipe = await recipeHelper.delete(recipId);
+        let deleteRecipe = await recipeHelper.remove(recipId);
         res.status(200).json(deleteRecipe);
     }catch(error){
         res.status(500).json({
