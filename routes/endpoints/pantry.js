@@ -4,7 +4,6 @@ const pantryHelper = require("../helperFunctions/pantryHelper");
 router.get("/", async (req,res)=>{
     try{
         let getPantryItems = await pantryHelper.find();
-
         res.status(200).json(getPantryItems);
     }
     catch(error){
@@ -17,8 +16,9 @@ router.get("/", async (req,res)=>{
 })
 
 router.get("/:item", async (req,res)=>{
-    try{let {item} = req.params;
-    let getSpecificItem = await pantryHelper.findByName(item);
+    try{
+        let {item} = req.params;
+        let getSpecificItem = await pantryHelper.findByName(item);
 
     res.status(200).json(getSpecificItem);
     }
@@ -26,20 +26,6 @@ router.get("/:item", async (req,res)=>{
         res.status(500).json({
             errorMessage:
             `Sorry something went wrong getting ${item}`
-        })
-        throw new Error(error)
-    }
-})
-
-router.get("/pantryRecipe", async (req,res)=>{
-    try{
-        let getRecipe = await pantryHelper.recipeUsingPantry();
-
-        res.status(200).json(getRecipe)
-    }catch(error){
-        res.status(500).json({
-            errorMessage:
-            "Sorry something went wrong getting recipe from pantry items"
         })
         throw new Error(error)
     }
