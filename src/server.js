@@ -8,6 +8,7 @@ const registerRoutes = require("../routes/endpoints/register")
 const socialRoutes = require("../routes/endpoints/social")
 const userRoutes = require("../routes/endpoints/user")
 const pantryRoutes = require("../routes/endpoints/pantry")
+const categoryRoutes = require("../routes/endpoints/category")
 const favoritedRecipeRoutes = require("../routes/endpoints/favoritedRecipe")
 
 const server = express()
@@ -24,6 +25,7 @@ server.use("/api/recipes",recipeRoutes)
 server.use("/api/social",socialRoutes)
 server.use("/api/user",userRoutes)
 server.use("/api/pantry",pantryRoutes)
+server.use("/api/category",categoryRoutes)
 server.use("/api/favorited",favoritedRecipeRoutes)
 
 
