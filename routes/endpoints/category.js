@@ -14,6 +14,20 @@ router.get("/", async (req,res)=>{
         }
 })
 
+router.get("/:id", async (req,res)=>{
+    try{
+        let categoryId = req.params.id;
+        let findCategory = categoryHelper.findById(categoryId);
+
+        res.status(200).json(findCategory);
+    }catch(error){
+        res.status(500),json({
+            errorMessage:
+            "Sorry something went wrong finding category"
+        })
+    }
+})
+
 router.get("/:name", async (req,res)=>{
     try{
         let categoryName = req.params.name;
@@ -61,11 +75,15 @@ router.post("/", async (req,res)=>{
 
 router.put("/:name", async (req,res)=>{
     try{
+        let categoryName = req.params.name;
+        let updatedCategory = req.body;
+        let getCategoryName = categoryHelper.update(categoryName,updatedCategory);
 
+        res.status(200).json(getCategoryName);
     }catch(error){
         res.status(500).json({
             errorMessage:
-            ""
+            "Sorry something went wrong getting category"
         })
         throw new Error(error)
     }
@@ -73,11 +91,14 @@ router.put("/:name", async (req,res)=>{
 
 router.delete("/:id", async (req,res)=>{
     try{
+        let categoryId = req.params.id;
+        let deleteCategory = categoryHelper.remove(categoryId);
 
+        res.status(200).json(deleteCategory);
     }catch(error){
         res.status(500).json({
             errorMessage:
-            ""
+            "Sorry something went wrong deleting category"
         })
         throw new Error(error)
     }

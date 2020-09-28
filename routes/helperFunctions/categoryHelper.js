@@ -4,8 +4,8 @@ const db = knex(knexConfig.development)
 
 module.exports = {
     find,
-    findByname,
     findById,
+    findByName,
     findAllRecipesInCategory,
     add,
     update,
