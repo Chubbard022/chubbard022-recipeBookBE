@@ -6,14 +6,15 @@ module.exprorts = {
     add,
     find,
     findByName,
-    findById
+    findById,
+    update,
+    remove
 }
 
 
 async function add(newRecipe){
     await db("inspiration")
                 .insert(newRecipe);
-                
     return await findByName(newRecipe.name);
 }
 
@@ -33,3 +34,15 @@ async function findById(id){
                 .first();
 }
 
+async function update(id,updatedRecipe){
+    await db("inspiration")
+                .where({id})
+                .update(updatedRecipe)
+    return await findById(id);    
+}
+
+async function remove(id){
+    await db("inspiration")
+            .where({id})
+            .del();
+}
