@@ -21,17 +21,13 @@ exports.up = function(knex) {
             recipe.string("ingredients").notNullable()
             recipe.string("instructions").notNullable()
             recipe.string("username")
-            recipe.boolean("favorited").notNullable()
-            recipe.integer("category_name")
+            recipe.boolean("favorited").defaultTo(false)
+            recipe.integer("categories_id")
                     .unsigned()
-                    .references("name")
-                    .inTable("category")
+                    .references("id")
+                    .inTable("categories")
                     .onDelete("RESTRICT")
-                    .onUpdate("CASCADE");
-        })
-        .createTable("category",category=>{
-            category.increments("id")
-            category.string("name")
+                    .onUpdate("CASCADE")
         })
         .createTable("favorited",favorite=>{
             favorite.increments("id")
@@ -42,6 +38,7 @@ exports.up = function(knex) {
             favorite.string("image")
             favorite.boolean("favorited")
         })
+        
         .createTable("pantryItems",itm=>{
             itm.increments("id")
             itm.string("nameOfItem").notNullable();
@@ -77,15 +74,19 @@ exports.up = function(knex) {
                 .onDelete("CASCADE")
                 .onUpdate("CASCADE")
         })
+        .createTable("categories",(category)=>{
+            category.increments("id")
+            category.string("name")
+        })
 };
 
 exports.down = function(knex) {
     return knex.schema
+        .dropTableIfExists("categories")
         .dropTableIfExists("recipeOfPantryItems")
         .dropTableIfExists("usersFavrotied")
         .dropTableIfExists("pantryItems")
         .dropTableIfExists("favorited")
-        .dropTableIfExists("category")
         .dropTableIfExists("recipes")
         .dropTableIfExists("inspiration")
         .dropTableIfExists("users")
