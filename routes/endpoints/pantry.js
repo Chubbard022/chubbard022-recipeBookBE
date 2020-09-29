@@ -40,7 +40,7 @@ router.post("/", async (req,res)=>{
     }catch(error){
         res.status(500).json({
             errorMessage:
-            `Sorry something went wrong adding ${newItem.nameOfItem} to pantry`
+            `Sorry something went wrong adding ${newItem} to pantry`
         })
         throw new Error(error)
     }
