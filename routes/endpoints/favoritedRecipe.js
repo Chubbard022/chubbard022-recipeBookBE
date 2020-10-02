@@ -1,7 +1,8 @@
 const router = require("express").Router()
+const {authenticate} = require("../auth/authenticate")
 const favoriteHelper = require("../helperFunctions/favoriteHelpers");
 
-router.get('/', async (req,res)=>{
+router.get('/', authenticate, async (req,res)=>{
     try{
         let favRecipeList = await favoriteHelper.find();
 
@@ -15,7 +16,7 @@ router.get('/', async (req,res)=>{
     }
 })
 
-router.get("/:id", async (req,res)=>{
+router.get("/:id", authenticate, async (req,res)=>{
     try{
         let id = req.params.id;
         let findFavRecipeById = await favoriteHelper.findById(id);
@@ -30,7 +31,7 @@ router.get("/:id", async (req,res)=>{
     }
 })
 
-router.post("/",async (req,res)=>{
+router.post("/", authenticate,async (req,res)=>{
     try{
         let newFavoritedRecipe = req.body;
         let addFavRecipe = await favoriteHelper.add(newFavoritedRecipe);
@@ -45,7 +46,7 @@ router.post("/",async (req,res)=>{
     }
 })
 
-router.delete("/:id", async (req,res)=>{
+router.delete("/:id", authenticate, async (req,res)=>{
     try{
         let id = req.params.id;
         let deleteFavRecipe = await favoriteHelper.remove(id);
