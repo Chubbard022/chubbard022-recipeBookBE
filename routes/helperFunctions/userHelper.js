@@ -13,13 +13,15 @@ module.exports = {
 
 //returns a list of all users
 async function findUser(){
-    return await db("users");
+    return await db("users")
+        .select("id","username")
 }
 
 //returns a user based on their name
 async function findUserByName(username){
     return await db("users")
                     .where({username})
+                    .select("id","username")
                     .first();
 }
 
