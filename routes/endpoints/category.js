@@ -1,7 +1,8 @@
 const router = require("express").Router();
+const {authenticate} = require("../auth/authenticate")
 const categoryHelper = require("../helperFunctions/categoryHelper")
 
-router.get("/", async (req,res)=>{
+router.get("/", authenticate, async (req,res)=>{
     try{
         let getCategories = await categoryHelper.find();
         res.status(200).json(getCategories);
@@ -14,7 +15,7 @@ router.get("/", async (req,res)=>{
     }
 })
 
-router.get("/:id", async (req,res)=>{
+router.get("/:id", authenticate, async (req,res)=>{
     try{
         let categoryId = req.params.id;
         let findCategory = await categoryHelper.findById(categoryId);
@@ -28,7 +29,7 @@ router.get("/:id", async (req,res)=>{
     }
 })
 
-router.get("/:name", async (req,res)=>{
+router.get("/:name", authenticate, async (req,res)=>{
     try{
         let categoryName = req.params.name;
         let getCategoryByName = await categoryHelper.findByname(categoryName);
@@ -43,7 +44,7 @@ router.get("/:name", async (req,res)=>{
     }
 })
 
-router.get("/recipes/:name", async (req,res)=>{
+router.get("/recipes/:name", authenticate, async (req,res)=>{
     try{
         let categoryName = req.params.name;
         let getRecipesInCategory = await categoryHelper.findAllRecipesInCategory(categoryName);
@@ -58,7 +59,7 @@ router.get("/recipes/:name", async (req,res)=>{
     }
 })
 
-router.post("/", async (req,res)=>{
+router.post("/", authenticate, async (req,res)=>{
     try{
         let newCategory = req.body;
         let addCategory = await categoryHelper.add(newCategory);
@@ -73,7 +74,7 @@ router.post("/", async (req,res)=>{
     }
 })
 
-router.put("/:name", async (req,res)=>{
+router.put("/:name", authenticate, async (req,res)=>{
     try{
         let categoryName = req.params.name;
         let updatedCategory = req.body;
@@ -89,7 +90,7 @@ router.put("/:name", async (req,res)=>{
     }
 })
 
-router.delete("/:id", async (req,res)=>{
+router.delete("/:id", authenticate, async (req,res)=>{
     try{
         let categoryId = req.params.id;
         let deleteCategory = await categoryHelper.remove(categoryId);

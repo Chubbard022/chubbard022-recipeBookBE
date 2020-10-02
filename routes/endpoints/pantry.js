@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const {authenticate} = require("../auth/authenticate");
 const pantryHelper = require("../helperFunctions/pantryHelper");
 
 router.get("/", async (req,res)=>{

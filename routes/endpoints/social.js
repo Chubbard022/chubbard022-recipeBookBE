@@ -1,7 +1,8 @@
-const router = require("express").Router()
-const socialHelper = require("../helperFunctions/socialHelper")
+const router = require("express").Router();
+const {authenticate} = require("../auth/authenticate");
+const socialHelper = require("../helperFunctions/socialHelper");
 
-router.get("/",async (req,res)=>{
+router.get("/", authenticate, async (req,res)=>{
     try{
         let getUsers =  await socialHelper.find();
 
@@ -16,7 +17,7 @@ router.get("/",async (req,res)=>{
     }
 })
 
-router.get("/:username", async (req,res)=>{
+router.get("/:username", authenticate, async (req,res)=>{
     try{
         let findUserRecipe = req.params.username;
         let getRecipesFromUser = await socialHelper.findByUsername(findUserRecipe);

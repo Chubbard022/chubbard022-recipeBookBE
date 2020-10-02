@@ -7,8 +7,9 @@ const Users = require("../auth/authenticate")
 module.exports = server => {
     server.post("/api/register", register);
     server.post("/api/login", login);
-    server.post("/api/logout",logout)
+    server.get("/api/logout",logout)
   };
+
   function register(req, res) { 
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 10);
@@ -22,6 +23,7 @@ module.exports = server => {
         res.status(500).json({errorMessage:"error with registering"});
       });
   }
+
   function login(req, res) {
     let { username, password } = req.body;
   
@@ -31,6 +33,7 @@ module.exports = server => {
         if (user && bcrypt.compareSync(password, user.password)) {
           const token = generateToken(user);
           let id = user.id
+          console.log("user",req)
           res.status(200).json({
             message: `Welcome ${user.username}!`,
             token,
@@ -51,15 +54,16 @@ module.exports = server => {
         if (err) {
           res
             .status(500)
-            .json({ errorMessage:'Error with trying to Logout'});
+            .json({ message: 'There was a problem logging out user.' });
         } else {
-          res.status(200).json({ message: 'logout successful' });
+          res.status(200).json({ message: 'Bye, have a great time!' });
         }
       });
     } else {
-      res.status(500).json({ errorMessage:'Error with trying to Logout' });
+      res.status(200).json({ message: 'Bye, have a great time!' });
     }
   }
+  
   function generateToken(user) {
     const payload = {
       subject: user.id,

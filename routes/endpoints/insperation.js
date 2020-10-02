@@ -1,8 +1,9 @@
 require("dotenv").config()
 const router = require("express").Router();
+const {authenticate} = require("../auth/authenticate");
 const inspirationHelper = require("../helperFunctions/insperationHelper");
 
-router.post(`/newrecipe`, async (req,res)=>{
+router.post(`/newrecipe`, authenticate, async (req,res)=>{
     try{    
         let newRecipe = req.body;
         let addRecipeToInspiration = await inspirationHelper.add(newRecipe);
@@ -17,7 +18,7 @@ router.post(`/newrecipe`, async (req,res)=>{
     }
 })
 
-router.get("/", async (req,res)=>{
+router.get("/", authenticate, async (req,res)=>{
     try{
         let inspirationList = inspirationHelper.find();
         res.status(200).json(inspirationList)
@@ -30,7 +31,7 @@ router.get("/", async (req,res)=>{
     }
 })
 
-router.get("/:id", async (req,res)=>{
+router.get("/:id", authenticate, async (req,res)=>{
     try{
         let insprirationId = req.params.id;
         let getInspirationById = inspirationHelper.findById(insprirationId);
@@ -46,7 +47,7 @@ router.get("/:id", async (req,res)=>{
     }
 })
 
-router.put("/:id",async (req,res)=>{
+router.put("/:id", authenticate, async (req,res)=>{
     try{
         let recipeId = req.params.id;
         let updatedInspo = req.body;
@@ -62,7 +63,7 @@ router.put("/:id",async (req,res)=>{
     }
 })
 
-router.delete("/:id", async (req,res)=>{
+router.delete("/:id", authenticate, async (req,res)=>{
     try{
         let recipeId = req.params.id;
         let deleteInspo = inspirationHelper.remove(recipeId);

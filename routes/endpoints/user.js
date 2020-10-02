@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const userHelper = require("../helperFunctions/userHelper");
-//const {authenticate} = require("../auth/authenticate");
+const {authenticate} = require("../auth/authenticate");
 
 
-router.get("/", async (req,res)=>{
+router.get("/", authenticate, async (req,res)=>{
     try{
         let getUserList = await userHelper.findUser();
         res.status(200).json(getUserList);
@@ -16,7 +16,7 @@ router.get("/", async (req,res)=>{
     }
 })
 
-router.get("/:username", async (req,res)=>{
+router.get("/:username", authenticate, async (req,res)=>{
     try{
         let {username}  = req.params;
         let getUser = await userHelper.findUserByName(username);
@@ -31,7 +31,7 @@ router.get("/:username", async (req,res)=>{
     }
 })
 
-router.get("/:username/favorited", async (req,res)=>{
+router.get("/:username/favorited", authenticate, async (req,res)=>{
     try{
         let {username} = req.params;
         let getUserFav = await userHelper.favoritedUserRecipes(username);
@@ -45,7 +45,7 @@ router.get("/:username/favorited", async (req,res)=>{
     }
 })
 
-router.get("/:username/recipes", async (req,res)=>{
+router.get("/:username/recipes", authenticate, async (req,res)=>{
     try{
         let {username} = req.params;
         let findRecipes = await userHelper.userRecipes(username);
@@ -60,7 +60,7 @@ router.get("/:username/recipes", async (req,res)=>{
     }
 })
 
-router.put("/:id", async (req,res)=>{
+router.put("/:id", authenticate, async (req,res)=>{
     try{
         let {id} = req.params;
         let userToUpdate = req.body;
@@ -76,7 +76,7 @@ router.put("/:id", async (req,res)=>{
     }
 })
 
-router.delete("/:id", async (req,res)=>{
+router.delete("/:id", authenticate, async (req,res)=>{
     try{
         let {id} = req.params;
         let deleteUser = await userHelper.remove(id);

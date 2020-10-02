@@ -1,7 +1,8 @@
 const router = require("express").Router()
+const {authenticate} = require("../auth/authenticate")
 const recipeHelper = require("../helperFunctions/recipeHelper")
 
-router.get("/", async (req,res)=>{
+router.get("/", authenticate, async (req,res)=>{
     try{
         let recipeList = await recipeHelper.find();
 
@@ -15,7 +16,7 @@ router.get("/", async (req,res)=>{
     }
 })
 
-router.get("/:id", async (req,res)=>{
+router.get("/:id", authenticate,  async (req,res)=>{
     try{
         let {id} = req.params;
         let getRecipe = await recipeHelper.findById(id);
@@ -29,7 +30,7 @@ router.get("/:id", async (req,res)=>{
     }
 })
 
-router.post("/", async (req,res)=>{
+router.post("/", authenticate,  async (req,res)=>{
     try{
         let newRecipe = req.body;
         let addRecipe = await recipeHelper.add(newRecipe);
@@ -45,7 +46,7 @@ router.post("/", async (req,res)=>{
     }
 })
 
-router.put("/:id", async (req,res)=>{
+router.put("/:id", authenticate,  async (req,res)=>{
     try{
         let {id} = req.params;
         let recipeToUpdate = req.body;
@@ -61,7 +62,7 @@ router.put("/:id", async (req,res)=>{
     }  
 })
 
-router.delete("/:id", async (req,res)=>{
+router.delete("/:id", authenticate,  async (req,res)=>{
     try{
         let recipId = req.params.id;
         let deleteRecipe = await recipeHelper.remove(recipId);
