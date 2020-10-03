@@ -27,7 +27,7 @@ server.use("/api/user",userRoutes)
 server.use("/api/pantry",pantryRoutes)
 server.use("/api/category",categoryRoutes)
 server.use("/api/favorited",favoritedRecipeRoutes)
+server.use("/api/auth",registerRoutes)
 
-
-registerRoutes(server)
+//registerRoutes(server)
 module.exports = server;     
