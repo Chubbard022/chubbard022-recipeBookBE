@@ -2,7 +2,7 @@ const knex = require("knex");
 const knexConfig = require("../../knexfile");
 const db = knex(knexConfig.development);
 
-module.exprorts = {
+module.exports = {
     add,
     find,
     findByName,
@@ -13,9 +13,9 @@ module.exprorts = {
 
 
 async function add(newRecipe){
-    await db("inspiration")
+    return await db("inspiration")
                 .insert(newRecipe);
-    return await findByName(newRecipe.name);
+    //return await findByName(newRecipe.name);
 }
 
 async function find(){
