@@ -13,7 +13,8 @@ module.exports = {
   
   function authenticate(req, res, next) {
     const token = process.env.TOKEN;
-    if (token !== "") {
+    const cookie = req.get("Authorization")
+    if (token !== "" || cookie !== "") {
       jwt.verify(token, jwtKey, (err, decoded) => {
         if (err) return res.status(401).json(err);
   
