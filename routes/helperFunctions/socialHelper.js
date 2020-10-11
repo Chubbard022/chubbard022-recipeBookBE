@@ -16,5 +16,4 @@ async function findByUsername(passedInUsername){
     return await db("users")
         .join("recipes","recipes.username", "=", "users.username")
         .where({"recipes.username": passedInUsername})
-        .select("name","ingredients","instructions")
 }

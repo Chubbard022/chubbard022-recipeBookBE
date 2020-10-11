@@ -2,7 +2,7 @@ const router = require("express").Router()
 const {authenticate} = require("../auth/authenticate")
 const recipeHelper = require("../helperFunctions/recipeHelper")
 
-router.get("/", authenticate, async (req,res)=>{
+router.get("/", async (req,res)=>{
     try{
         let recipeList = await recipeHelper.find();
 
@@ -16,7 +16,7 @@ router.get("/", authenticate, async (req,res)=>{
     }
 })
 
-router.get("/:id", authenticate,  async (req,res)=>{
+router.get("/:id", async (req,res)=>{
     try{
         let {id} = req.params;
         let getRecipe = await recipeHelper.findById(id);
@@ -27,6 +27,22 @@ router.get("/:id", authenticate,  async (req,res)=>{
             errorMessage:
             "sorry something went wrong getting recipe"
         })
+        throw new Error(error)
+    }
+})
+
+router.get("/username/:username", async (req,res)=>{
+    try{
+        let username = req.params.username;
+        let getRecipeUser = await recipeHelper.findByName(username);
+
+        res.status(200).json(getRecipeUser);
+    }catch(error){
+        res.status(500).json({
+            errorMesssage:
+            "sorry something went wrong getting recipe"
+        })
+        throw new Error(error)
     }
 })
 

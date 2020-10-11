@@ -3,6 +3,8 @@ const express = require("express");
 const db = require("../helperFunctions/registerHelper");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {authenticate} = require("../auth/authenticate")
+const registerHelper = require("../helperFunctions/registerHelper")
 
 const route = express.Router();
 
@@ -46,6 +48,20 @@ route.post("/login", (req, res) => {
       });
   }
 });
+
+route.get("/allUserInfo",  async (req,res)=>{
+  try{
+    let getAllUserInfo = await registerHelper.getAllUserInfo()
+    res.status(200).json(getAllUserInfo)
+  }catch(error){
+    res.status(400).json({
+      errorMessage: "Sorry something went wrong getting all user data"
+    })
+    throw new Error(error)
+  } 
+})
+
+
 
 //need to change function
 route.get("/logout",(req,res)=>{

@@ -16,8 +16,16 @@ const getAll = () => {
   return db('users');
 };
 
+const getAllUserInfo = () => {
+  //knex.select('*').from('users').leftJoin('accounts', 'users.id', 'accounts.user_id')
+   return db("users").join("recipes","users.username","=","recipes.username")
+    .join("favorited","recipes.username","=","favorited.username")
+
+}
+
 module.exports = {
   register,
   login,
-  getAll
+  getAll,
+  getAllUserInfo
 };
