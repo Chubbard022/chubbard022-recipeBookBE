@@ -16,12 +16,12 @@ router.get('/', authenticate, async (req,res)=>{
     }
 })
 
-router.get("/:id", authenticate, async (req,res)=>{
+router.get("/:name", authenticate, async (req,res)=>{
     try{
-        let id = req.params.id;
-        let findFavRecipeById = await favoriteHelper.findById(id);
+        let name = req.params.name;
+        let findFavRecipeByName = await favoriteHelper.findByName(name);
 
-        res.status(200).json(findFavRecipeById);
+        res.status(200).json(findFavRecipeByName);
     }catch(error){
         res.status(500).json({
             errorMessage:

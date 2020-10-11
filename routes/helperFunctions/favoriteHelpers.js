@@ -4,7 +4,7 @@ const db = knex(knexConfig.development)
 
 module.exports = {
     find,
-    findById,
+    findByName,
     findUserFavorited,
     add,            
     remove
@@ -16,10 +16,9 @@ async function find(){
 }
 
 //returns a favorited recipe based off of id
-async function findById(id){
+async function findByName(name){
     return await db("favorited")
-                .where({id})
-                .first();
+                .where({username:name})
 }
 
 //returns a list of recipes favorited by user

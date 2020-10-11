@@ -18,7 +18,8 @@ const getAll = () => {
 
 const getAllUserInfo = () => {
   //knex.select('*').from('users').leftJoin('accounts', 'users.id', 'accounts.user_id')
-   return db("users").leftJoin("recipes","users.username","recipes.username")
+   return db("users").join("recipes","users.username","=","recipes.username")
+    .join("favorited","recipes.username","=","favorited.username")
 
 }
 

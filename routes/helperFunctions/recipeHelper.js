@@ -5,6 +5,7 @@ const db = knex(knexConfig.development)
 module.exports = {
     find,
     findById,
+    findByName,
     add,
     update,
     remove
@@ -19,7 +20,12 @@ async function find(){
 async function findById(id){
     return await db("recipes")
                 .where({id})
-                .first()
+}
+
+//returns recipes given passed in username
+async function findByName(username){
+    return await db("recipes")
+                .where({username})
 }
 
 //adds a new recipe to table
