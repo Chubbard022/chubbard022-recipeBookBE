@@ -6,7 +6,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './data/dev.sqlite3'
+      filename: './src/data/dev.sqlite3'
     },
     useNullAsDefault: true,
     pool: {
@@ -14,10 +14,10 @@ module.exports = {
         connection.run("PRAGMA foreign_keys = ON",done)
       }
     },migrations: {
-      directory: "./data/migrations"
+      directory: "./src/data/migrations"
     },
     seeds: {
-      directory: "./data/seeds"
+      directory: "./src/data/seeds"
     }
   },
 
@@ -25,14 +25,14 @@ module.exports = {
     client: "sqlite3",
     connection:{
       filename:
-      "./data/test.sqlite3"
+      "./src/data/test.sqlite3"
     },
     useNullAsDefault: true,
   migrations: {
-    directory: "./data/migrations"
+    directory: "./src/data/migrations"
   },
   seeds: {
-    directory: "./data/seeds"
+    directory: "./src/data/seeds"
   }
   },
 

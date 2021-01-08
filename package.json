@@ -31,8 +31,11 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "server": "nodemon ./src/index.js",
-    "start": "node ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "npm run clean && npx nodemon",
+    "test": "jest",
+    "compile": "tsc --outDir dist/",
+    "clean": "rm -rf dist/*",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+
   }
 }
