@@ -1,19 +1,16 @@
-const knex = require("knex")
-const knexConfig = require("../../../../knexfile");
-const db = knex(knexConfig.development)
+const knex = require('knex');
+const knexConfig = require('../../../../knexfile');
+const db = knex(knexConfig.development);
 
 module.exports = {
-    find, 
-    findByUsername
+  find,
+  findByUsername,
+};
+
+async function find() {
+  return await db('users').select('username');
 }
 
-async function find(){
-    return await db("users")
-        .select("username");
-}
-
-async function findByUsername(passedInUsername){
-    return await db("users")
-        .join("recipes","recipes.username", "=", "users.username")
-        .where({"recipes.username": passedInUsername})
+async function findByUsername(passedInUsername) {
+  return await db('users').join('recipes', 'recipes.username', '=', 'users.username').where({ 'recipes.username': passedInUsername });
 }
