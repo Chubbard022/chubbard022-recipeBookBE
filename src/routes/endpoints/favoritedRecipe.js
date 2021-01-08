@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const {authenticate} = require("../auth/authenticate")
-const favoriteHelper = require("../helperFunctions/favoriteHelpers");
+const favoriteHelper = require("../helpers/Favorited");
 
 router.get('/', authenticate, async (req,res)=>{
     try{

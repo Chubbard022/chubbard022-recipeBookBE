@@ -1,7 +1,7 @@
 require("dotenv").config()
 const router = require("express").Router();
 const {authenticate} = require("../auth/authenticate");
-const inspirationHelper = require("../helperFunctions/insperationHelper");
+const inspirationHelper = require("../helpers/Insperation");
 
 router.post(`/newrecipe`, authenticate, async (req,res)=>{
     try{    

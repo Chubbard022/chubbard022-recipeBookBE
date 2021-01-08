@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {authenticate} = require("../auth/authenticate");
-const socialHelper = require("../helperFunctions/socialHelper");
+const socialHelper = require("../helpers/User/social");
 
 router.get("/", authenticate, async (req,res)=>{
     try{

@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const db = require("../helperFunctions/registerHelper");
+const db = require("../helpers/User/register");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const {authenticate} = require("../auth/authenticate")
-const registerHelper = require("../helperFunctions/registerHelper")
+const registerHelper = require("../helpers/User/register")
 
 const route = express.Router();
 

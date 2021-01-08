@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const userHelper = require("../helperFunctions/userHelper");
+const userHelper = require("../helpers/User");
 const {authenticate} = require("../auth/authenticate");
 
 

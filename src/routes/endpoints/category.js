@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {authenticate} = require("../auth/authenticate")
-const categoryHelper = require("../helperFunctions/categoryHelper")
+const categoryHelper = require("../helpers/Category")
 
 router.get("/", authenticate, async (req,res)=>{
     try{

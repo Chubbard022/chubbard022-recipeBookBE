@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {authenticate} = require("../auth/authenticate");
-const pantryHelper = require("../helperFunctions/pantryHelper");
+const pantryHelper = require("../helpers/Pantry");
 
 router.get("/", async (req,res)=>{
     try{
