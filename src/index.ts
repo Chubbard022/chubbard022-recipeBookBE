@@ -4,14 +4,14 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const inspoRoutes = require('./recipeRoutes/endpoints/insperation');
-const recipeRoutes = require('./recipeRoutes/endpoints/recipe');
-const registerRoutes = require('./recipeRoutes/endpoints/register');
-const socialRoutes = require('./recipeRoutes/endpoints/social');
-const userRoutes = require('./recipeRoutes/endpoints/user');
-const pantryRoutes = require('./recipeRoutes/endpoints/pantry');
-const categoryRoutes = require('./recipeRoutes/endpoints/category');
-const favoritedRecipeRoutes = require('./recipeRoutes/endpoints/favoritedRecipe');
+import inspirationRoutes from './recipeRoutes/endpoints/inspiration';
+import recipeRoutes from './recipeRoutes/endpoints/recipe';
+import registerRoutes from './recipeRoutes/endpoints/register';
+import socialRoutes from './recipeRoutes/endpoints/social';
+import userRoutes from './recipeRoutes/endpoints/user';
+import pantryRoutes  from './recipeRoutes/endpoints/pantry';
+import categoryRoutes from './recipeRoutes/endpoints/category';
+import favoritedRecipeRoutes from './recipeRoutes/endpoints/favoritedRecipe';
 
 const server = express();
 
@@ -23,7 +23,7 @@ server.use(
   }),
 );
 
-server.use('/api/inspiration', inspoRoutes);
+server.use('/api/inspiration', inspirationRoutes);
 server.use('/api/recipes', recipeRoutes);
 server.use('/api/social', socialRoutes);
 server.use('/api/user', userRoutes);

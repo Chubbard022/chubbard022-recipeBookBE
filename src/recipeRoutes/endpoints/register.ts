@@ -1,14 +1,13 @@
-require('dotenv').config();
-const express = require('express');
-const db = require('../helpers/User/register');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { authenticate } = require('../auth/authenticate');
-const registerHelper = require('../helpers/User/register');
+import dotenv from 'dotenv';
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import db from '../helpers/User/register';
+import registerHelper from '../helpers/User/register';
 
 const route = express.Router();
+dotenv.config()
 
-// register route
 route.post('/register', (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -23,7 +22,6 @@ route.post('/register', (req, res) => {
   }
 });
 
-// login route
 route.post('/login', (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -40,7 +38,7 @@ route.post('/login', (req, res) => {
 
           res.json({ id: user.id, message: `Welcome ${username}`, token });
         } else {
-          res.status(401).json({ messag: 'Invalid Credentials' });
+          res.status(401).json({ message: 'Invalid Credentials' });
         }
       })
       .catch((err) => {
@@ -66,11 +64,11 @@ route.get('/logout', (req, res) => {
   try {
     process.env.TOKEN = '';
     res.status(200).json({
-      successMessgae: 'Successfully logged out',
+      successMessage: 'Successfully logged out',
     });
   } catch (error) {
     res.status(400).json({
-      errorMessage: 'Something went wrong while loggin out',
+      errorMessage: 'Something went wrong while logging out',
     });
   }
 });

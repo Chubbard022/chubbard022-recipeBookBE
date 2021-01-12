@@ -1,6 +1,8 @@
-const router = require('express').Router();
-const { authenticate } = require('../auth/authenticate');
-const categoryHelper = require('../helpers/Category');
+import express from 'express';
+import { authenticate } from '../auth/authenticate';
+import router from'../helpers/Category';
+
+const router = express.Router();
 
 router.get('/', authenticate, async (req, res) => {
   try {
@@ -21,7 +23,7 @@ router.get('/:id', authenticate, async (req, res) => {
 
     res.status(200).json(findCategory);
   } catch (error) {
-    res.status(500),
+    res.status(500).
       json({
         errorMessage: 'Sorry something went wrong finding category',
       });
@@ -31,7 +33,7 @@ router.get('/:id', authenticate, async (req, res) => {
 router.get('/:name', authenticate, async (req, res) => {
   try {
     let categoryName = req.params.name;
-    let getCategoryByName = await categoryHelper.findByname(categoryName);
+    let getCategoryByName = await categoryHelper.findByName(categoryName);
 
     res.status(200).json(getCategoryByName);
   } catch (error) {

@@ -1,6 +1,8 @@
-const router = require('express').Router();
-const { authenticate } = require('../auth/authenticate');
+import express from 'express';
+import { authenticate } from '../auth/authenticate';
 const socialHelper = require('../helpers/User/social');
+
+const router = express.Router();
 
 router.get('/', authenticate, async (req, res) => {
   try {
