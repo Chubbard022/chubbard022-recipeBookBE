@@ -1,6 +1,9 @@
-const router = require('express').Router();
-const userHelper = require('../helpers/User');
-const { authenticate } = require('../auth/authenticate');
+import express from 'express';
+import { authenticate } from '../auth/authenticate';
+import userHelper from '../helpers/User/index.tss';
+
+const router = express.Router();
+
 
 router.get('/', authenticate, async (req, res) => {
   try {

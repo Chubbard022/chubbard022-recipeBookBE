@@ -1,6 +1,9 @@
-const router = require('express').Router();
-const { authenticate } = require('../auth/authenticate');
-const favoriteHelper = require('../helpers/Favorited');
+import express from 'express';
+import { authenticate } from '../auth/authenticate';
+import  favoriteHelper from '../helpers/Favorited';
+
+const router = express.Router();
+
 
 router.get('/', authenticate, async (req, res) => {
   try {

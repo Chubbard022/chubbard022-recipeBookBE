@@ -1,7 +1,10 @@
-require('dotenv').config();
-const router = require('express').Router();
-const { authenticate } = require('../auth/authenticate');
-const inspirationHelper = require('../helpers/Insperation');
+import dotenv from 'dotenv';
+import express from 'express';
+import { authenticate } from '../auth/authenticate';
+const inspirationHelper = require('../helpers/Inspiration');
+
+const router = express.Router();
+dotenv.config()
 
 router.post(`/newrecipe`, authenticate, async (req, res) => {
   try {
@@ -16,6 +19,7 @@ router.post(`/newrecipe`, authenticate, async (req, res) => {
     throw new Error(error);
   }
 });
+
 router.get('/', authenticate, async (req, res) => {
   try {
     let inspirationList = await inspirationHelper.find();

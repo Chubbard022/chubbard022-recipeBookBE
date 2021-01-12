@@ -1,6 +1,8 @@
-const router = require('express').Router();
-const { authenticate } = require('../auth/authenticate');
-const recipeHelper = require('../helpers/Recipe');
+import express from 'express';
+import { authenticate } from '../auth/authenticate';
+import recipeHelper from '../helpers/Recipe';
+
+const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {

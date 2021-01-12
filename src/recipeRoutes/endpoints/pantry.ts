@@ -1,6 +1,7 @@
-const router = require('express').Router();
-const { authenticate } = require('../auth/authenticate');
-const pantryHelper = require('../helpers/Pantry');
+import express from 'express';
+import pantryHelper from '../helpers/Pantry';
+
+const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
@@ -22,7 +23,7 @@ router.get('/:item', async (req, res) => {
     res.status(200).json(getSpecificItem);
   } catch (error) {
     res.status(500).json({
-      errorMessage: `Sorry something went wrong getting ${item}`,
+      errorMessage: `Sorry something went wrong getting pantry item`,
     });
     throw new Error(error);
   }
@@ -36,7 +37,7 @@ router.post('/', async (req, res) => {
     res.status(201).json(addItem);
   } catch (error) {
     res.status(500).json({
-      errorMessage: `Sorry something went wrong adding ${newItem} to pantry`,
+      errorMessage: `Sorry something went wrong adding to pantry`,
     });
     throw new Error(error);
   }
@@ -51,7 +52,7 @@ router.put('/:id', async (req, res) => {
     res.status(200).json(updateItem);
   } catch (error) {
     res.status(500).json({
-      errorMessage: `Sorry something went wrong updating ${itemToUpdate.nameOfItem}`,
+      errorMessage: `Sorry something went wrong updating updating pantry item`,
     });
     throw new Error(error);
   }
