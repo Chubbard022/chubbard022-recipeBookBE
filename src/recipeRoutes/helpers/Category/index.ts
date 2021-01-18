@@ -1,17 +1,10 @@
-const knex = require('knex');
-const knexConfig = require('../../../../knexfile');
+import knex from 'knex'
+import knexConfig from '../../../../knexfile';
 const db = knex(knexConfig.development);
 
-module.exports = {
-  find,
-  findById,
-  findByName,
-  findAllRecipesInCategory,
-  add,
-  update,
-  remove,
-};
 
+
+const Category = () =>{
 //returns a list of all categories
 async function find() {
   return await db('categories');
@@ -47,3 +40,5 @@ async function update(categoryID, updatedCategory) {
 async function remove(categoryID) {
   return await db('categories').where({ id: categoryID }).del();
 }
+}
+export default Category;

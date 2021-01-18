@@ -1,12 +1,12 @@
-import express from 'express';
+import { Request, Response, Router } from 'express';
 import { authenticate } from '../auth/authenticate';
-import router from'../helpers/Category';
+import {find} from'../helpers/Category/index';
 
-const router = express.Router();
+const categoryRoutes = Router()
 
-router.get('/', authenticate, async (req, res) => {
+.get('/', authenticate, async (req, res) => {
   try {
-    let getCategories = await categoryHelper.find();
+    let getCategories = await find();
     res.status(200).json(getCategories);
   } catch (error) {
     res.status(500).json({
@@ -14,9 +14,9 @@ router.get('/', authenticate, async (req, res) => {
     });
     throw new Error(error);
   }
-});
+})
 
-router.get('/:id', authenticate, async (req, res) => {
+.get('/:id', authenticate, async (req: Request, res:Response) => {
   try {
     let categoryId = req.params.id;
     let findCategory = await categoryHelper.findById(categoryId);
@@ -28,9 +28,9 @@ router.get('/:id', authenticate, async (req, res) => {
         errorMessage: 'Sorry something went wrong finding category',
       });
   }
-});
+})
 
-router.get('/:name', authenticate, async (req, res) => {
+.get('/:name', authenticate, async (req, res) => {
   try {
     let categoryName = req.params.name;
     let getCategoryByName = await categoryHelper.findByName(categoryName);
@@ -42,9 +42,9 @@ router.get('/:name', authenticate, async (req, res) => {
     });
     throw new Error(error);
   }
-});
+})
 
-router.get('/recipes/:name', authenticate, async (req, res) => {
+.get('/recipes/:name', authenticate, async (req, res) => {
   try {
     let categoryName = req.params.name;
     let getRecipesInCategory = await categoryHelper.findAllRecipesInCategory(categoryName);
@@ -56,9 +56,9 @@ router.get('/recipes/:name', authenticate, async (req, res) => {
     });
     throw new Error(error);
   }
-});
+})
 
-router.post('/', authenticate, async (req, res) => {
+.post('/', authenticate, async (req, res) => {
   try {
     let newCategory = req.body;
     let addCategory = await categoryHelper.add(newCategory);
@@ -70,9 +70,9 @@ router.post('/', authenticate, async (req, res) => {
     });
     throw new Error(error);
   }
-});
+})
 
-router.put('/:name', authenticate, async (req, res) => {
+.put('/:name', authenticate, async (req, res) => {
   try {
     let categoryName = req.params.name;
     let updatedCategory = req.body;
@@ -85,9 +85,9 @@ router.put('/:name', authenticate, async (req, res) => {
     });
     throw new Error(error);
   }
-});
+})
 
-router.delete('/:id', authenticate, async (req, res) => {
+.delete('/:id', authenticate, async (req, res) => {
   try {
     let categoryId = req.params.id;
     let deleteCategory = await categoryHelper.remove(categoryId);
@@ -101,4 +101,4 @@ router.delete('/:id', authenticate, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default categoryRoutes;

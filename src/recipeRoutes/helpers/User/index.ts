@@ -1,5 +1,5 @@
-const knex = require('knex');
-const knexConfig = require('../../../../knexfile');
+import knex from 'knex'
+import knexConfig from '../../../../knexfile';
 const db = knex(knexConfig.development);
 
 module.exports = {
@@ -23,9 +23,9 @@ async function findUserByName(username) {
 
 //returns a list of favorited recipes given passed in user
 async function favoritedUserRecipes(username) {
-  return await 'usersFavrotied'
-    .join('favorited', 'favorited.id', '=', 'usersFavrotied.favorited')
-    .where({ 'usersFavrotied.user_id': username });
+  // return await 'usersFavrotied'
+  //   .join('favorited', 'favorited.id', '=', 'usersFavrotied.favorited')
+  //   .where({ 'usersFavrotied.user_id': username });
 }
 
 //returns a list of recipes that are associated to a passed in user.

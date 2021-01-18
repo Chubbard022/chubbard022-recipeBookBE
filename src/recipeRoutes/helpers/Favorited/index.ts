@@ -1,5 +1,5 @@
-const knex = require('knex');
-const knexConfig = require('../../../../knexfile');
+import knex from 'knex'
+import knexConfig from '../../../../knexfile';
 const db = knex(knexConfig.development);
 
 module.exports = {
@@ -32,8 +32,8 @@ async function findUserFavorited(user) {
 
 //adding a new favorited recipe to table
 async function add(newFavRecipe) {
-  const [id] = await db('favorited').insert(newFavRecipe);
-  return findById(id);
+  // const [id] = await db('favorited').insert(newFavRecipe);
+  // return findB(id);
 }
 
 //removes a favorited recipe given passed in id
