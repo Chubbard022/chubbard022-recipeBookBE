@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express';
 import { authenticate } from '../auth/authenticate';
 import {find} from'../helpers/Category/index';
 
-const categoryRoutes = Router()
+const categoryRoutes:Router = Router()
 
 .get('/', authenticate, async (req, res) => {
   try {
