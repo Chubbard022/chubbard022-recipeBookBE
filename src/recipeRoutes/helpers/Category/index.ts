@@ -1,9 +1,3 @@
-import knex from 'knex'
-import knexConfig from '../../../../knexfile';
-const db = knex(knexConfig.development);
-
-
-
 const Category = () =>{
 //returns a list of all categories
 async function find() {
